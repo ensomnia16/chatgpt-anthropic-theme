@@ -1,0 +1,228 @@
+:root {
+  color-scheme: light dark;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --paper: #f7f3eb;
+  --paper-2: #eee7db;
+  --ink: #2d2926;
+  --muted: #746b63;
+  --line: rgba(74, 62, 52, 0.16);
+  --accent: #d97757;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 340px;
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+main {
+  display: grid;
+  gap: 18px;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.mark {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border-radius: 11px;
+  background: var(--accent);
+  color: #fffaf2;
+  font-family: Georgia, serif;
+  font-size: 22px;
+}
+
+h1,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+header p {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+fieldset {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+legend {
+  margin-bottom: 8px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.font-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  min-height: 76px;
+  padding: 13px 14px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: rgba(255, 255, 255, 0.45);
+  cursor: pointer;
+  transition: border-color 140ms ease, background 140ms ease, transform 140ms ease;
+}
+
+.font-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(217, 119, 87, 0.52);
+}
+
+.font-card:has(input:checked) {
+  border-color: var(--accent);
+  background: rgba(217, 119, 87, 0.09);
+}
+
+.font-card input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.card-copy {
+  display: grid;
+  gap: 4px;
+}
+
+.card-copy strong {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.serif-preview {
+  font-family: Georgia, "Songti SC", serif;
+}
+
+.sans-preview {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.card-copy small,
+.toggle-row small {
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+.check {
+  display: grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: transparent;
+  font-size: 13px;
+}
+
+.font-card:has(input:checked) .check {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: white;
+}
+
+.toggle-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  padding-top: 2px;
+}
+
+.toggle-row > span {
+  display: grid;
+  gap: 3px;
+}
+
+.toggle-row strong {
+  font-size: 13px;
+}
+
+input[role="switch"] {
+  width: 38px;
+  height: 22px;
+  appearance: none;
+  border-radius: 999px;
+  background: rgba(74, 62, 52, 0.2);
+  cursor: pointer;
+  transition: background 140ms ease;
+}
+
+input[role="switch"]::after {
+  display: block;
+  width: 18px;
+  height: 18px;
+  margin: 2px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 1px 4px rgba(45, 41, 38, 0.25);
+  content: "";
+  transition: transform 140ms ease;
+}
+
+input[role="switch"]:checked {
+  background: var(--accent);
+}
+
+input[role="switch"]:checked::after {
+  transform: translateX(16px);
+}
+
+footer {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #64805f;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #2d2926;
+    --paper-2: #37312d;
+    --ink: #f2ece5;
+    --muted: #b8ada4;
+    --line: rgba(242, 236, 229, 0.14);
+  }
+
+  .font-card {
+    background: rgba(255, 255, 255, 0.035);
+  }
+}

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ChatGPT Anthropic Typography</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="mark">A</div>
+        <div>
+          <h1>Anthropic Typography</h1>
+          <p>ChatGPT 字体与色彩</p>
+        </div>
+      </header>
+
+      <fieldset>
+        <legend>字体系列</legend>
+
+        <label class="font-card">
+          <input type="radio" name="fontMode" value="serif">
+          <span class="card-copy">
+            <strong class="serif-preview">Serif 宋体</strong>
+            <small>嘉编辑宋 / Anthropic Serif<br>中文物理 600</small>
+          </span>
+          <span class="check">✓</span>
+        </label>
+
+        <label class="font-card">
+          <input type="radio" name="fontMode" value="sans">
+          <span class="card-copy">
+            <strong class="sans-preview">Sans 黑体</strong>
+            <small>Anthropic Sans 英文<br>ChatGPT 默认中文</small>
+          </span>
+          <span class="check">✓</span>
+        </label>
+      </fieldset>
+
+      <label class="toggle-row">
+        <span>
+          <strong>Anthropic 色系</strong>
+          <small>暖纸色背景与陶土色点缀</small>
+        </span>
+        <input id="anthropicColors" type="checkbox" role="switch">
+      </label>
+
+      <footer>
+        <span class="status-dot"></span>
+        <span id="status" aria-live="polite">修改会立即生效</span>
+      </footer>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>

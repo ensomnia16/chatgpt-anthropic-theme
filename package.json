@@ -1,0 +1,8 @@
+{
+  "name": "chatgpt-anthropic-typography",
+  "version": "3.0.0",
+  "private": true,
+  "scripts": {
+    "test": "node --check content.js && node --check popup.js && node scripts/validate.mjs"
+  }
+}

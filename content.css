@@ -1,0 +1,264 @@
+/*
+ * No font binaries are distributed with this extension. Every source below
+ * resolves through a locally installed font name.
+ */
+
+@font-face {
+  font-family: "CGPT Editorial Serif";
+  src:
+    local("Jia Editorial Serif Codex VF"),
+    local("Jia Editorial Serif Codex VF Regular"),
+    local("JiaEditorialSerifCodexVF-Regular"),
+    local("嘉编辑宋Codex可变");
+  font-style: normal;
+  font-weight: 250 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CGPT Anthropic Serif";
+  src:
+    local("Anthropic Serif Web Text Light"),
+    local("AnthropicSerifWebWeb-TextLight");
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CGPT Anthropic Serif";
+  src:
+    local("Anthropic Serif Web Text Regular"),
+    local("AnthropicSerifWebWeb-TextRegular");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CGPT Anthropic Serif";
+  src:
+    local("Anthropic Serif Web Text Medium"),
+    local("AnthropicSerifWebWeb-TextMedium");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CGPT Anthropic Serif";
+  src:
+    local("Anthropic Serif Web Text Semibold"),
+    local("AnthropicSerifWebWeb-TextSemibold");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CGPT Anthropic Serif";
+  src:
+    local("Anthropic Serif Web Text Bold"),
+    local("AnthropicSerifWebWeb-TextBold");
+  font-style: normal;
+  font-weight: 700 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CGPT Source Han Serif 600";
+  src:
+    local("Source Han Serif SC VF SemiBold"),
+    local("SourceHanSerifSCVF-SemiBold"),
+    local("思源宋体 VF SemiBold");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CGPT Anthropic Sans";
+  src:
+    local("Anthropic Sans Web Text Light"),
+    local("AnthropicSansWebWeb-TextLight");
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CGPT Anthropic Sans";
+  src:
+    local("Anthropic Sans Web Text Regular"),
+    local("AnthropicSansWebWeb-TextRegular");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CGPT Anthropic Sans";
+  src:
+    local("Anthropic Sans Web Text Medium"),
+    local("AnthropicSansWebWeb-TextMedium");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CGPT Anthropic Sans";
+  src:
+    local("Anthropic Sans Web Text Semibold"),
+    local("AnthropicSansWebWeb-TextSemibold");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CGPT Anthropic Sans";
+  src:
+    local("Anthropic Sans Web Text Bold"),
+    local("AnthropicSansWebWeb-TextBold");
+  font-style: normal;
+  font-weight: 700 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CGPT Anthropic Mono";
+  src:
+    local("Anthropic Mono Web"),
+    local("AnthropicMonoWebWeb-Regular");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CGPT Anthropic Mono";
+  src:
+    local("Anthropic Mono Web Medium"),
+    local("AnthropicMonoWebWeb-Medium");
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CGPT Anthropic Mono";
+  src:
+    local("Anthropic Mono Web Semibold"),
+    local("AnthropicMonoWebWeb-Semibold");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "CGPT Anthropic Mono";
+  src:
+    local("Anthropic Mono Web Bold"),
+    local("AnthropicMonoWebWeb-Bold");
+  font-style: normal;
+  font-weight: 700 900;
+  font-display: swap;
+}
+
+html[data-cgpt-font-mode="serif"] {
+  --cgpt-body-font:
+    "CGPT Editorial Serif",
+    "CGPT Anthropic Serif",
+    "CGPT Source Han Serif 600",
+    serif;
+}
+
+html[data-cgpt-font-mode="sans"] {
+  --cgpt-body-font:
+    "CGPT Anthropic Sans",
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "PingFang SC",
+    "Hiragino Sans GB",
+    "Microsoft YaHei",
+    sans-serif;
+}
+
+:where(
+  html body,
+  html body .font-sans,
+  html body button,
+  html body input,
+  html body textarea,
+  html body select,
+  [data-message-author-role],
+  [data-message-author-role] :where(p, li, blockquote, h1, h2, h3, h4, h5, h6, strong, em, a, table, th, td),
+  form .ProseMirror,
+  form .ProseMirror :where(p, strong, em, a)
+) {
+  font-family: var(--cgpt-body-font) !important;
+}
+
+:where(html body) :where(pre, code, kbd, samp, .font-mono) {
+  font-family:
+    "CGPT Anthropic Mono",
+    ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace !important;
+}
+
+/* KaTeX child spans keep their own KaTeX_Math/Size/SansSerif families. */
+:where(html body) .katex {
+  font-family: KaTeX_Main, "Times New Roman", serif !important;
+}
+
+/* Optional warm, paper-like Anthropic-inspired palette. */
+html[data-cgpt-anthropic-colors="on"] {
+  --main-surface-primary: #f7f3eb;
+  --main-surface-secondary: #efe9de;
+  --main-surface-tertiary: #e7dfd2;
+  --sidebar-surface-primary: #ece5d9;
+  --sidebar-surface-secondary: #e4dccf;
+  --sidebar-surface-tertiary: #dbd2c4;
+  --message-surface: #ebe3d7;
+  --composer-surface: #fffaf2;
+  --text-primary: #2d2926;
+  --text-secondary: #6f665f;
+  --text-tertiary: #92877e;
+  --border-light: rgba(77, 65, 56, 0.14);
+  --border-medium: rgba(77, 65, 56, 0.24);
+  --cgpt-accent: #d97757;
+}
+
+html[data-cgpt-anthropic-colors="on"] body {
+  background: var(--main-surface-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+html[data-cgpt-anthropic-colors="on"] :where(a:hover, button:hover) {
+  --text-secondary: #a34f35;
+}
+
+html.dark[data-cgpt-anthropic-colors="on"] {
+  --main-surface-primary: #2d2926;
+  --main-surface-secondary: #37312d;
+  --main-surface-tertiary: #403833;
+  --sidebar-surface-primary: #272320;
+  --sidebar-surface-secondary: #302a26;
+  --sidebar-surface-tertiary: #3a332e;
+  --message-surface: #3c342f;
+  --composer-surface: #38312d;
+  --text-primary: #f2ece5;
+  --text-secondary: #c3b8ae;
+  --text-tertiary: #968a80;
+  --border-light: rgba(242, 236, 229, 0.12);
+  --border-medium: rgba(242, 236, 229, 0.2);
+  --cgpt-accent: #e08a6b;
+}
