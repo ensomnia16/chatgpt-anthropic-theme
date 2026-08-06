@@ -15,6 +15,10 @@ modes and an optional warm color palette.
 - **Math** — preserves KaTeX's own math families.
 - **Colors** — optional warm paper, clay, and ink palette inspired by Anthropic's
   visual language, with light and dark variants.
+- **Claude-style thinking words** — optionally rotates ChatGPT's live `Thinking`
+  label through `Pondering`, `Reasoning`, `Analyzing`, `Exploring`, `Reflecting`,
+  `Considering`, `Synthesizing`, `Deliberating`, `Investigating`, and
+  `Formulating`.
 - Settings sync through Chrome and apply immediately without reloading ChatGPT.
 
 ## Install
@@ -42,8 +46,8 @@ sans-serif, and monospace families.
 ## Privacy
 
 The extension has no analytics, network requests, or remote code. It stores only
-two preferences in Chrome sync storage: the selected font mode and whether the
-color palette is enabled.
+three preferences in Chrome sync storage: the selected font mode, whether the
+color palette is enabled, and whether Claude-style thinking words are enabled.
 
 ## License
 

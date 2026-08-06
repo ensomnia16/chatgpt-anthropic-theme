@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "ChatGPT Anthropic Typography",
-  "version": "3.0.0",
-  "description": "Switch ChatGPT between Anthropic Serif and Sans typography, with optional Anthropic-inspired colors.",
+  "version": "3.1.0",
+  "description": "Anthropic-inspired fonts, colors, and Claude-style thinking words for ChatGPT.",
   "permissions": ["storage"],
   "host_permissions": [
     "https://chatgpt.com/*",

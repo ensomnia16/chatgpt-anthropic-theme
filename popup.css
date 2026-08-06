@@ -154,7 +154,7 @@ legend {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
-  padding-top: 2px;
+  padding: 2px 0;
 }
 
 .toggle-row > span {
