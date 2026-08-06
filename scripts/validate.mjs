@@ -16,6 +16,10 @@ const requiredFiles = [
   "popup.html",
   "popup.css",
   "popup.js",
+  "icons/icon16.png",
+  "icons/icon32.png",
+  "icons/icon48.png",
+  "icons/icon128.png",
   "LICENSE",
   "NOTICE.md"
 ];
@@ -45,5 +49,9 @@ const css = await readFile(new URL("content.css", root), "utf8");
 if (remoteFontUrl.test(css)) throw new Error("Remote font URLs are not allowed");
 if (!css.includes("CGPT Anthropic Mono")) throw new Error("Anthropic Mono rule is missing");
 if (!css.includes("KaTeX_Main")) throw new Error("KaTeX preservation rule is missing");
+
+const contentScript = await readFile(new URL("content.js", root), "utf8");
+if (!contentScript.includes("claudeThinking")) throw new Error("Thinking preference is missing");
+if (!contentScript.includes("Pondering")) throw new Error("Thinking word rotation is missing");
 
 console.log("Extension validation passed");

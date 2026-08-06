@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="800" viewBox="0 0 1280 800">
+  <rect width="1280" height="800" fill="#f7f3eb"/>
+  <rect width="250" height="800" fill="#ece5d9"/>
+  <rect x="24" y="28" width="40" height="40" rx="12" fill="#d97757"/>
+  <text x="44" y="56" text-anchor="middle" font-family="Georgia,serif" font-size="24" fill="#fffaf2">A</text>
+  <text x="78" y="54" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="18" font-weight="700" fill="#2d2926">Editorial Chat</text>
+  <g font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="16" fill="#5e554e">
+    <text x="30" y="122">＋  New chat</text>
+    <text x="30" y="166">▣  Library</text>
+    <text x="30" y="210">◷  Scheduled</text>
+  </g>
+  <text x="30" y="276" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="12" font-weight="700" fill="#8b8077">RECENT</text>
+  <rect x="18" y="300" width="214" height="44" rx="12" fill="#ddd4c7"/>
+  <text x="34" y="328" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="14" fill="#2d2926">Typography preview</text>
+  <text x="320" y="120" font-family="Georgia,'Songti SC',serif" font-size="34" fill="#2d2926">A calmer way to read and think.</text>
+  <text x="320" y="164" font-family="Georgia,'Songti SC',serif" font-size="19" fill="#6f665f">Serif or Sans for prose. Mono for code. Math stays untouched.</text>
+  <rect x="320" y="214" width="610" height="118" rx="24" fill="#ebe3d7"/>
+  <text x="352" y="258" font-family="Georgia,'Songti SC',serif" font-size="20" fill="#2d2926">请比较两种排版模式，并保留公式与代码字体。</text>
+  <text x="352" y="294" font-family="Georgia,serif" font-size="18" fill="#6f665f">Compare both typography modes while preserving math and code.</text>
+  <text x="320" y="392" font-family="Georgia,'Songti SC',serif" font-size="21" fill="#2d2926">The interface now uses a warm editorial rhythm:</text>
+  <g font-family="Georgia,'Songti SC',serif" font-size="20" fill="#2d2926">
+    <text x="344" y="438">•  physical 600-weight Chinese serif</text>
+    <text x="344" y="476">•  Anthropic-inspired Latin typography</text>
+    <text x="344" y="514">•  protected KaTeX rendering</text>
+  </g>
+  <text x="320" y="574" font-family="Georgia,serif" font-size="18" font-style="italic" fill="#d16d50">Pondering</text>
+  <rect x="962" y="72" width="282" height="528" rx="24" fill="#fffaf2" stroke="#d8cfc3"/>
+  <rect x="986" y="98" width="38" height="38" rx="11" fill="#d97757"/>
+  <text x="1005" y="125" text-anchor="middle" font-family="Georgia,serif" font-size="22" fill="#fffaf2">A</text>
+  <text x="1038" y="112" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="15" font-weight="700" fill="#2d2926">Anthropic Typography</text>
+  <text x="1038" y="130" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="11" fill="#746b63">ChatGPT 字体与色彩</text>
+  <text x="986" y="176" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="11" font-weight="700" fill="#746b63">字体系列</text>
+  <rect x="986" y="194" width="234" height="76" rx="13" fill="#f7e8df" stroke="#d97757"/>
+  <text x="1002" y="224" font-family="Georgia,'Songti SC',serif" font-size="18" fill="#2d2926">Serif 宋体</text>
+  <text x="1002" y="248" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="11" fill="#746b63">Editorial Serif / physical 600</text>
+  <circle cx="1198" cy="232" r="11" fill="#d97757"/><text x="1198" y="237" text-anchor="middle" font-family="sans-serif" font-size="12" fill="white">✓</text>
+  <rect x="986" y="280" width="234" height="76" rx="13" fill="#fff" fill-opacity=".5" stroke="#ddd3c7"/>
+  <text x="1002" y="310" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="18" fill="#2d2926">Sans 黑体</text>
+  <text x="1002" y="334" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="11" fill="#746b63">Sans Latin / system CJK</text>
+  <text x="986" y="400" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="13" font-weight="700" fill="#2d2926">Anthropic 色系</text>
+  <text x="986" y="420" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="11" fill="#746b63">暖纸色背景与陶土色点缀</text>
+  <rect x="1178" y="399" width="38" height="22" rx="11" fill="#d97757"/><circle cx="1205" cy="410" r="9" fill="white"/>
+  <text x="986" y="466" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="13" font-weight="700" fill="#2d2926">Claude-style Thinking</text>
+  <text x="986" y="486" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="11" fill="#746b63">Pondering、Analyzing 等状态词</text>
+  <rect x="1178" y="465" width="38" height="22" rx="11" fill="#d97757"/><circle cx="1205" cy="476" r="9" fill="white"/>
+  <line x1="986" y1="530" x2="1220" y2="530" stroke="#ddd3c7"/>
+  <circle cx="991" cy="558" r="3" fill="#64805f"/>
+  <text x="1002" y="562" font-family="-apple-system,BlinkMacSystemFont,sans-serif" font-size="10" fill="#746b63">修改会立即生效</text>
+  <rect x="320" y="664" width="610" height="74" rx="28" fill="#fffaf2" stroke="#ded5ca"/>
+  <text x="354" y="710" font-family="Georgia,'Songti SC',serif" font-size="18" fill="#92877e">Ask anything…</text>
+</svg>

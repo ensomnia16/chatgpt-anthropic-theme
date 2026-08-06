@@ -1,8 +1,14 @@
 {
   "manifest_version": 3,
   "name": "ChatGPT Anthropic Typography",
-  "version": "3.0.0",
-  "description": "Switch ChatGPT between Anthropic Serif and Sans typography, with optional Anthropic-inspired colors.",
+  "version": "3.1.0",
+  "description": "Anthropic-inspired fonts, colors, and Claude-style thinking words for ChatGPT.",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
   "permissions": ["storage"],
   "host_permissions": [
     "https://chatgpt.com/*",
@@ -21,6 +27,10 @@
   ],
   "action": {
     "default_title": "ChatGPT Anthropic Typography",
-    "default_popup": "popup.html"
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png"
+    }
   }
 }
