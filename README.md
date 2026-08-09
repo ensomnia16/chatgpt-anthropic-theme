@@ -21,7 +21,8 @@ modes and an optional warm color palette.
   `Percolating`, `Noodling`, `Puzzling`, `Exploring`, `Mapping`, `Tinkering`,
   `Coalescing`, `Wibbling`, and other verbs observed in Claude Code. Chinese UI
   labels receive matched translations such as `深思中`, `沉思中`, `酝酿中`,
-  `琢磨中`, `推敲中`, and `探索中`.
+  `琢磨中`, `推敲中`, and `探索中`. Gemini's `Generating` / `正在生成` states
+  are recognized as thinking-session entry points as well.
 - **Claude-style animation** — optional `· ✢ * ✶` spark loop with a subtle text
   breath; it respects the operating system's reduced-motion preference and never
   changes the selected word during a session.

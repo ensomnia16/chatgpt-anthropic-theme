@@ -73,6 +73,7 @@ const CHINESE_THINKING_WORDS = Object.freeze([
 // version can be adopted without starting a second randomization loop.
 const LEGACY_ENGLISH_WORDS = Object.freeze([
   "Thinking",
+  "Generating",
   "Reasoning",
   "Analyzing",
   "Reflecting",
@@ -86,6 +87,8 @@ const LEGACY_ENGLISH_WORDS = Object.freeze([
 const LEGACY_CHINESE_WORDS = Object.freeze([
   "正在思考",
   "思考中",
+  "正在生成",
+  "生成中",
   "推理中",
   "分析中",
   "反思中",
