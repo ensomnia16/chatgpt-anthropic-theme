@@ -4,7 +4,7 @@ const DEFAULTS = Object.freeze({
   claudeThinking: false
 });
 
-const THINKING_WORDS = Object.freeze([
+const ENGLISH_THINKING_WORDS = Object.freeze([
   "Pondering",
   "Reasoning",
   "Analyzing",
@@ -17,8 +17,21 @@ const THINKING_WORDS = Object.freeze([
   "Formulating"
 ]);
 
+const CHINESE_THINKING_WORDS = Object.freeze([
+  "深思中",
+  "推理中",
+  "分析中",
+  "探索中",
+  "反思中",
+  "斟酌中",
+  "整合中",
+  "权衡中",
+  "研究中",
+  "构思中"
+]);
+
 const THINKING_SOURCE_PATTERN = /^(?:Thinking|正在思考|思考中)(?:\s*(?:\u2026{1,2}|\.{3}))?$/i;
-const THINKING_WORD_SET = new Set(THINKING_WORDS);
+const THINKING_WORD_SET = new Set([...ENGLISH_THINKING_WORDS, ...CHINESE_THINKING_WORDS]);
 const trackedThinkingNodes = new Map();
 const thinkingSessions = new Map();
 let thinkingObserver;
@@ -55,8 +68,9 @@ function getThinkingAnchor(node) {
   ) || parent;
 }
 
-function randomThinkingWord() {
-  return THINKING_WORDS[Math.floor(Math.random() * THINKING_WORDS.length)];
+function randomThinkingWord(language) {
+  const words = language === "zh" ? CHINESE_THINKING_WORDS : ENGLISH_THINKING_WORDS;
+  return words[Math.floor(Math.random() * words.length)];
 }
 
 function untrackThinkingNode(node) {
@@ -81,7 +95,8 @@ function trackThinkingNode(node) {
 
   let session = thinkingSessions.get(anchor);
   if (!session) {
-    session = { word: randomThinkingWord(), nodes: new Set() };
+    const language = /[\u3400-\u9fff]/.test(parts.text) ? "zh" : "en";
+    session = { word: randomThinkingWord(language), nodes: new Set() };
     thinkingSessions.set(anchor, session);
   }
 

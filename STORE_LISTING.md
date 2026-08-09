@@ -15,7 +15,7 @@ Features:
 - Anthropic Mono support for code blocks and inline code
 - Preserves KaTeX math rendering
 - Optional warm paper, clay, and ink color palette
-- Optional Claude-style thinking words such as Pondering, Analyzing, and Reflecting
+- Optional Claude-style thinking words, localized for English and Chinese ChatGPT interfaces
 - Settings sync through Chrome and apply immediately
 - No analytics, network requests, remote code, or chat-content collection
 
