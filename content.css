@@ -262,3 +262,38 @@ html.dark[data-cgpt-anthropic-colors="on"] {
   --border-medium: rgba(242, 236, 229, 0.2);
   --cgpt-accent: #e08a6b;
 }
+
+/* Optional Claude Code-inspired spark loop. The word itself stays stable. */
+@keyframes cgpt-thinking-spark {
+  0%, 24.99% { content: "·"; transform: scale(0.92) rotate(0deg); }
+  25%, 49.99% { content: "✢"; transform: scale(1) rotate(20deg); }
+  50%, 74.99% { content: "*"; transform: scale(0.95) rotate(45deg); }
+  75%, 100% { content: "✶"; transform: scale(1.04) rotate(70deg); }
+}
+
+@keyframes cgpt-thinking-breathe {
+  0%, 100% { opacity: 0.58; }
+  50% { opacity: 1; }
+}
+
+html[data-cgpt-thinking-animation="on"] [data-cgpt-thinking-active="on"] {
+  animation: cgpt-thinking-breathe 1.35s ease-in-out infinite;
+}
+
+html[data-cgpt-thinking-animation="on"] [data-cgpt-thinking-active="on"]::before {
+  display: inline-block;
+  width: 1.15em;
+  color: var(--cgpt-accent, currentColor);
+  content: "✢";
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  text-align: center;
+  transform-origin: 50% 50%;
+  animation: cgpt-thinking-spark 1.1s steps(1, end) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-cgpt-thinking-animation="on"] [data-cgpt-thinking-active="on"],
+  html[data-cgpt-thinking-animation="on"] [data-cgpt-thinking-active="on"]::before {
+    animation: none;
+  }
+}

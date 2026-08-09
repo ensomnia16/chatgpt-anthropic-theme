@@ -2,11 +2,11 @@
 
 ## Summary
 
-Editorial serif and sans typography, warm colors, mono code, and playful thinking words for ChatGPT.
+Editorial fonts, warm colors, mono code, and Claude-style thinking states for ChatGPT and Gemini.
 
 ## Detailed description
 
-Give ChatGPT a calmer, editorial reading experience with two carefully tuned typography modes and an optional warm paper-inspired palette.
+Give ChatGPT and Gemini a calmer, editorial reading experience with two carefully tuned typography modes and an optional warm paper-inspired palette.
 
 Features:
 
@@ -15,7 +15,8 @@ Features:
 - Anthropic Mono support for code blocks and inline code
 - Preserves KaTeX math rendering
 - Optional warm paper, clay, and ink color palette
-- Optional Claude-style thinking words such as Pondering, Analyzing, and Reflecting
+- Optional Claude Code spinner words, localized for English and Chinese interfaces
+- Optional Claude-style `· ✢ * ✶` thinking animation with reduced-motion support
 - Settings sync through Chrome and apply immediately
 - No analytics, network requests, remote code, or chat-content collection
 
@@ -29,17 +30,17 @@ Functionality & UI
 
 ## Single purpose
 
-Customize ChatGPT's typography, code font, colors, and transient thinking-status label according to user-selected appearance preferences.
+Customize ChatGPT and Gemini typography, code font, colors, and transient thinking-status presentation according to user-selected appearance preferences.
 
 ## Permission justifications
 
 ### storage
 
-Stores only the selected font mode and the two optional appearance toggles in Chrome sync storage.
+Stores only the selected font mode and the three optional appearance toggles in Chrome sync storage.
 
 ### Host permissions
 
-Required only for `chatgpt.com` and `chat.openai.com` so the extension can apply the selected local CSS and replace the transient `Thinking` label. No page or chat content is collected or transmitted.
+Required only for `chatgpt.com`, `chat.openai.com`, and `gemini.google.com` so the extension can apply the selected local CSS and customize the transient thinking label. No page or chat content is collected or transmitted.
 
 ## Data usage
 
