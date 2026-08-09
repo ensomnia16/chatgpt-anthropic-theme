@@ -17,7 +17,7 @@ const THINKING_WORDS = Object.freeze([
   "Formulating"
 ]);
 
-const THINKING_SOURCE_PATTERN = /^Thinking(?:\u2026|\.{3})?$/i;
+const THINKING_SOURCE_PATTERN = /^(?:Thinking|正在思考|思考中)(?:\s*(?:\u2026{1,2}|\.{3}))?$/i;
 const THINKING_WORD_SET = new Set(THINKING_WORDS);
 const trackedThinkingNodes = new Map();
 const thinkingSessions = new Map();

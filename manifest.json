@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "ChatGPT Anthropic Typography",
-  "version": "3.1.1",
+  "version": "3.1.2",
   "description": "Anthropic-inspired fonts, colors, and Claude-style thinking words for ChatGPT.",
   "icons": {
     "16": "icons/icon16.png",

@@ -19,7 +19,8 @@ modes and an optional warm color palette.
   ChatGPT `Thinking` session and keeps it stable until that session ends. Words
   include `Pondering`, `Reasoning`, `Analyzing`, `Exploring`, `Reflecting`,
   `Considering`, `Synthesizing`, `Deliberating`, `Investigating`, and
-  `Formulating`.
+  `Formulating`. English `Thinking` and Chinese `正在思考` / `思考中` labels are
+  recognized, including their ellipsis variants.
 - Settings sync through Chrome and apply immediately without reloading ChatGPT.
 
 ## Install
