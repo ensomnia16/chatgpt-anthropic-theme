@@ -15,8 +15,9 @@ modes and an optional warm color palette.
 - **Math** — preserves KaTeX's own math families.
 - **Colors** — optional warm paper, clay, and ink palette inspired by Anthropic's
   visual language, with light and dark variants.
-- **Claude-style thinking words** — optionally rotates ChatGPT's live `Thinking`
-  label through `Pondering`, `Reasoning`, `Analyzing`, `Exploring`, `Reflecting`,
+- **Claude-style thinking words** — chooses one random replacement for each
+  ChatGPT `Thinking` session and keeps it stable until that session ends. Words
+  include `Pondering`, `Reasoning`, `Analyzing`, `Exploring`, `Reflecting`,
   `Considering`, `Synthesizing`, `Deliberating`, `Investigating`, and
   `Formulating`.
 - Settings sync through Chrome and apply immediately without reloading ChatGPT.

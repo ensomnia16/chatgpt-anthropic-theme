@@ -20,10 +20,9 @@ const THINKING_WORDS = Object.freeze([
 const THINKING_SOURCE_PATTERN = /^Thinking(?:\u2026|\.{3})?$/i;
 const THINKING_WORD_SET = new Set(THINKING_WORDS);
 const trackedThinkingNodes = new Map();
+const thinkingSessions = new Map();
 let thinkingObserver;
-let thinkingTimer;
 let scanFrame;
-let thinkingWordIndex = 0;
 
 function splitWhitespace(value) {
   const match = value.match(/^(\s*)(.*?)(\s*)$/s);
@@ -49,17 +48,51 @@ function isSafeThinkingContext(node) {
   );
 }
 
+function getThinkingAnchor(node) {
+  const parent = node.parentElement;
+  return parent?.closest(
+    "[role='status'], [aria-live='polite'], [aria-live='assertive'], [data-message-author-role='assistant']"
+  ) || parent;
+}
+
+function randomThinkingWord() {
+  return THINKING_WORDS[Math.floor(Math.random() * THINKING_WORDS.length)];
+}
+
+function untrackThinkingNode(node) {
+  const metadata = trackedThinkingNodes.get(node);
+  if (!metadata) return;
+
+  trackedThinkingNodes.delete(node);
+  metadata.session.nodes.delete(node);
+  if (metadata.session.nodes.size === 0) {
+    thinkingSessions.delete(metadata.anchor);
+  }
+}
+
 function trackThinkingNode(node) {
   if (trackedThinkingNodes.has(node) || !isSafeThinkingContext(node)) return;
 
   const parts = splitWhitespace(node.nodeValue || "");
   if (!THINKING_SOURCE_PATTERN.test(parts.text)) return;
 
+  const anchor = getThinkingAnchor(node);
+  if (!anchor) return;
+
+  let session = thinkingSessions.get(anchor);
+  if (!session) {
+    session = { word: randomThinkingWord(), nodes: new Set() };
+    thinkingSessions.set(anchor, session);
+  }
+
   trackedThinkingNodes.set(node, {
     original: node.nodeValue,
     leading: parts.leading,
-    trailing: parts.trailing
+    trailing: parts.trailing,
+    anchor,
+    session
   });
+  session.nodes.add(node);
 }
 
 function scanForThinking(root) {
@@ -77,35 +110,33 @@ function scanForThinking(root) {
   while ((node = walker.nextNode())) trackThinkingNode(node);
 }
 
-function rotateThinkingWord() {
-  const word = THINKING_WORDS[thinkingWordIndex % THINKING_WORDS.length];
-  thinkingWordIndex += 1;
-
+function applyThinkingWords() {
   for (const [node, metadata] of trackedThinkingNodes) {
     if (!node.isConnected) {
-      trackedThinkingNodes.delete(node);
+      untrackThinkingNode(node);
       continue;
     }
 
     const current = splitWhitespace(node.nodeValue || "").text;
     if (!THINKING_SOURCE_PATTERN.test(current) && !THINKING_WORD_SET.has(current)) {
-      trackedThinkingNodes.delete(node);
+      untrackThinkingNode(node);
       continue;
     }
 
-    node.nodeValue = `${metadata.leading}${word}${metadata.trailing}`;
+    const replacement = `${metadata.leading}${metadata.session.word}${metadata.trailing}`;
+    if (node.nodeValue !== replacement) node.nodeValue = replacement;
   }
 
   // Ignore MutationObserver records caused by our own text replacements.
   thinkingObserver?.takeRecords();
 }
 
-function scheduleThinkingScan(root) {
+function scheduleThinkingScan() {
   if (scanFrame) return;
   scanFrame = requestAnimationFrame(() => {
     scanFrame = undefined;
-    scanForThinking(root?.isConnected ? root : document.body || document);
-    rotateThinkingWord();
+    scanForThinking(document.body || document);
+    applyThinkingWords();
   });
 }
 
@@ -113,15 +144,17 @@ function startThinkingSwap() {
   if (thinkingObserver) return;
 
   scanForThinking(document.body || document);
-  rotateThinkingWord();
+  applyThinkingWords();
 
   thinkingObserver = new MutationObserver((mutations) => {
     for (const mutation of mutations) {
       if (mutation.type === "characterData") {
-        scheduleThinkingScan(mutation.target);
+        scheduleThinkingScan();
         continue;
       }
-      for (const node of mutation.addedNodes) scheduleThinkingScan(node);
+      if (mutation.addedNodes.length > 0 || mutation.removedNodes.length > 0) {
+        scheduleThinkingScan();
+      }
     }
   });
   thinkingObserver.observe(document.documentElement, {
@@ -129,14 +162,11 @@ function startThinkingSwap() {
     childList: true,
     characterData: true
   });
-  thinkingTimer = setInterval(rotateThinkingWord, 1600);
 }
 
 function stopThinkingSwap() {
   thinkingObserver?.disconnect();
   thinkingObserver = undefined;
-  clearInterval(thinkingTimer);
-  thinkingTimer = undefined;
   if (scanFrame) cancelAnimationFrame(scanFrame);
   scanFrame = undefined;
 
@@ -146,6 +176,7 @@ function stopThinkingSwap() {
     }
   }
   trackedThinkingNodes.clear();
+  thinkingSessions.clear();
 }
 
 function applySettings(settings) {
