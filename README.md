@@ -19,6 +19,11 @@ modes and an optional warm color palette.
   label through `Pondering`, `Reasoning`, `Analyzing`, `Exploring`, `Reflecting`,
   `Considering`, `Synthesizing`, `Deliberating`, `Investigating`, and
   `Formulating`.
+- **Cleaner project tab titles** — removes the project-name prefix from project
+  conversations, for example `嘉 - 查询河套学院` becomes `查询河套学院`.
+- **One-click project chat** — clicking the extension's toolbar icon opens a new
+  chat in the project shown in the active ChatGPT tab. Outside a project, it
+  opens a regular new ChatGPT chat.
 - Settings sync through Chrome and apply immediately without reloading ChatGPT.
 
 ## Install
@@ -27,7 +32,12 @@ modes and an optional warm color palette.
 2. Open `chrome://extensions/` in Chrome.
 3. Enable **Developer mode**.
 4. Click **Load unpacked** and select this repository folder.
-5. Open ChatGPT and click the extension icon to choose a mode.
+5. Open ChatGPT and click the extension icon to start a new chat in the current
+   project.
+
+Typography settings remain available from the extension's **Options** page:
+right-click the toolbar icon and choose **Options**, or open the extension's
+details page in `chrome://extensions/` and select **Extension options**.
 
 ## Fonts
 
@@ -48,6 +58,8 @@ sans-serif, and monospace families.
 The extension has no analytics, network requests, or remote code. It stores only
 three preferences in Chrome sync storage: the selected font mode, whether the
 color palette is enabled, and whether Claude-style thinking words are enabled.
+The `activeTab` permission is used only when the toolbar icon is clicked, so the
+extension can identify and open the active ChatGPT project's new-chat page.
 
 ## License
 

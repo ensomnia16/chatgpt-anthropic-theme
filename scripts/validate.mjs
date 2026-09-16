@@ -5,14 +5,15 @@ const root = new URL("../", import.meta.url);
 const manifest = JSON.parse(await readFile(new URL("manifest.json", root), "utf8"));
 
 if (manifest.manifest_version !== 3) throw new Error("Manifest V3 is required");
-if (JSON.stringify(manifest.permissions) !== JSON.stringify(["storage"])) {
-  throw new Error("The public extension should request only the storage permission");
+if (JSON.stringify(manifest.permissions) !== JSON.stringify(["storage", "activeTab"])) {
+  throw new Error("The extension should request only storage and activeTab permissions");
 }
 
 const requiredFiles = [
   "manifest.json",
   "content.css",
   "content.js",
+  "background.js",
   "popup.html",
   "popup.css",
   "popup.js",
@@ -53,5 +54,9 @@ if (!css.includes("KaTeX_Main")) throw new Error("KaTeX preservation rule is mis
 const contentScript = await readFile(new URL("content.js", root), "utf8");
 if (!contentScript.includes("claudeThinking")) throw new Error("Thinking preference is missing");
 if (!contentScript.includes("Pondering")) throw new Error("Thinking word rotation is missing");
+if (!contentScript.includes("removeProjectNameFromTitle")) throw new Error("Project title cleanup is missing");
+
+const backgroundScript = await readFile(new URL("background.js", root), "utf8");
+if (!backgroundScript.includes("getProjectNewChatUrl")) throw new Error("Project chat action is missing");
 
 console.log("Extension validation passed");

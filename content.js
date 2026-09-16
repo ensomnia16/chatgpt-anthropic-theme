@@ -24,6 +24,59 @@ let thinkingObserver;
 let thinkingTimer;
 let scanFrame;
 let thinkingWordIndex = 0;
+let titleObserver;
+let lastCleanedTitle;
+
+const PROJECT_CONVERSATION_PATTERN = /^\/g\/g-p-[^/]+\/c(?:\/|$)/;
+const PROJECT_ROOT_PATTERN = /^\/g\/(g-p-[^/]+)/;
+
+function removeProjectNameFromTitle() {
+  if (!PROJECT_CONVERSATION_PATTERN.test(location.pathname)) return;
+  if (document.title === lastCleanedTitle) return;
+
+  const separatorIndex = document.title.indexOf(" - ");
+  if (separatorIndex < 1) return;
+
+  const conversationTitle = document.title.slice(separatorIndex + 3).trim();
+  if (conversationTitle) {
+    lastCleanedTitle = conversationTitle;
+    document.title = conversationTitle;
+  }
+}
+
+function startProjectTitleCleanup() {
+  removeProjectNameFromTitle();
+
+  const title = document.querySelector("title");
+  if (!title || titleObserver) return;
+
+  titleObserver = new MutationObserver(removeProjectNameFromTitle);
+  titleObserver.observe(title, { childList: true, characterData: true, subtree: true });
+}
+
+function getProjectNewChatUrl() {
+  const projectMatch = location.pathname.match(PROJECT_ROOT_PATTERN);
+  if (!projectMatch) return null;
+
+  const projectSegment = projectMatch[1];
+  for (const anchor of document.querySelectorAll("a[href]")) {
+    try {
+      const url = new URL(anchor.href, location.origin);
+      const candidate = url.pathname.match(/^\/g\/(g-p-[^/]+)\/project\/?$/);
+      if (
+        url.origin === location.origin &&
+        candidate &&
+        (candidate[1] === projectSegment || candidate[1].startsWith(`${projectSegment}-`))
+      ) {
+        return url.href;
+      }
+    } catch {
+      // Ignore links with unsupported URL schemes.
+    }
+  }
+
+  return `${location.origin}/g/${projectSegment}/project`;
+}
 
 function splitWhitespace(value) {
   const match = value.match(/^(\s*)(.*?)(\s*)$/s);
@@ -160,6 +213,17 @@ function applySettings(settings) {
 }
 
 chrome.storage.sync.get(DEFAULTS, applySettings);
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", startProjectTitleCleanup, { once: true });
+} else {
+  startProjectTitleCleanup();
+}
+
+chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+  if (message?.type !== "getProjectNewChatUrl") return;
+  sendResponse({ url: getProjectNewChatUrl() });
+});
 
 chrome.storage.onChanged.addListener((changes, areaName) => {
   if (areaName !== "sync") return;
