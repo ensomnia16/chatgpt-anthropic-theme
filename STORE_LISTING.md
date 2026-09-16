@@ -2,11 +2,11 @@
 
 ## Summary
 
-Editorial serif and sans typography, warm colors, mono code, and playful thinking words for ChatGPT.
+Editorial typography, warm colors, thinking states, and faster project chats for ChatGPT and Gemini.
 
 ## Detailed description
 
-Give ChatGPT a calmer, editorial reading experience with two carefully tuned typography modes and an optional warm paper-inspired palette.
+Give ChatGPT and Gemini a calmer, editorial reading experience with two carefully tuned typography modes and an optional warm paper-inspired palette.
 
 Features:
 
@@ -15,13 +15,16 @@ Features:
 - Anthropic Mono support for code blocks and inline code
 - Preserves KaTeX math rendering
 - Optional warm paper, clay, and ink color palette
-- Optional Claude-style thinking words such as Pondering, Analyzing, and Reflecting
+- Optional Claude Code thinking words with matched Chinese translations
+- Optional Claude-style · ✢ * ✶ thinking animation
+- Cleaner ChatGPT project tab titles without the repeated project-name prefix
+- One-click new chats inside the current ChatGPT project
 - Settings sync through Chrome and apply immediately
 - No analytics, network requests, remote code, or chat-content collection
 
 Optional commercial font files are not included. When matching local fonts are unavailable, the extension uses standard system fallbacks.
 
-This is an independent, unofficial extension and is not affiliated with or endorsed by OpenAI or Anthropic.
+This is an independent, unofficial extension and is not affiliated with or endorsed by OpenAI, Anthropic, or Google.
 
 ## Category
 
@@ -29,17 +32,21 @@ Functionality & UI
 
 ## Single purpose
 
-Customize ChatGPT's typography, code font, colors, and transient thinking-status label according to user-selected appearance preferences.
+Customize ChatGPT and Gemini typography, code font, colors, and transient thinking states, while streamlining ChatGPT project navigation.
 
 ## Permission justifications
 
 ### storage
 
-Stores only the selected font mode and the two optional appearance toggles in Chrome sync storage.
+Stores only the selected font mode and three optional appearance toggles in Chrome sync storage.
+
+### activeTab
+
+Activated only when the toolbar icon is clicked. It identifies the current ChatGPT project and opens that project's new-chat page; no tab URL or page data is stored or transmitted.
 
 ### Host permissions
 
-Required only for `chatgpt.com` and `chat.openai.com` so the extension can apply the selected local CSS and replace the transient `Thinking` label. No page or chat content is collected or transmitted.
+Required only for `chatgpt.com`, `chat.openai.com`, and `gemini.google.com` so the extension can apply the selected local CSS and replace transient thinking labels. No page or chat content is collected or transmitted.
 
 ## Data usage
 

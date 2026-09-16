@@ -54,9 +54,14 @@ if (!css.includes("KaTeX_Main")) throw new Error("KaTeX preservation rule is mis
 const contentScript = await readFile(new URL("content.js", root), "utf8");
 if (!contentScript.includes("claudeThinking")) throw new Error("Thinking preference is missing");
 if (!contentScript.includes("Pondering")) throw new Error("Thinking word rotation is missing");
+if (!contentScript.includes("Percolating")) throw new Error("Verified spinner verb set is missing");
+if (!contentScript.includes("claudeThinkingAnimation")) throw new Error("Thinking animation preference is missing");
 if (!contentScript.includes("removeProjectNameFromTitle")) throw new Error("Project title cleanup is missing");
 
 const backgroundScript = await readFile(new URL("background.js", root), "utf8");
 if (!backgroundScript.includes("getProjectNewChatUrl")) throw new Error("Project chat action is missing");
+if (!manifest.host_permissions.includes("https://gemini.google.com/*")) {
+  throw new Error("Gemini host permission is missing");
+}
 
 console.log("Extension validation passed");
