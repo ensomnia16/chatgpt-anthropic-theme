@@ -18,10 +18,9 @@ read or retain message content. Text-node observation is performed locally and
 temporarily only to replace the live `Thinking` status label when the user has
 enabled that option.
 
-The `activeTab` permission is activated only when the user clicks the extension
-toolbar icon. It is used to identify the current ChatGPT project and navigate
-that tab to the project's new-chat page. No tab URL or page data is retained or
-transmitted.
+When the toolbar icon is clicked, the extension uses its existing ChatGPT host
+access to identify the current project and navigate that tab to the project's
+new-chat page. No tab URL or page data is retained or transmitted.
 
 Questions and support requests may be submitted through the public GitHub
 repository: https://github.com/ensomnia16/chatgpt-anthropic-theme

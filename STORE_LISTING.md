@@ -40,13 +40,9 @@ Customize ChatGPT and Gemini typography, code font, colors, and transient thinki
 
 Stores only the selected font mode and three optional appearance toggles in Chrome sync storage.
 
-### activeTab
-
-Activated only when the toolbar icon is clicked. It identifies the current ChatGPT project and opens that project's new-chat page; no tab URL or page data is stored or transmitted.
-
 ### Host permissions
 
-Required only for `chatgpt.com`, `chat.openai.com`, and `gemini.google.com` so the extension can apply the selected local CSS and replace transient thinking labels. No page or chat content is collected or transmitted.
+Required only for `chatgpt.com`, `chat.openai.com`, and `gemini.google.com` so the extension can apply the selected local CSS, replace transient thinking labels, and open a new chat in the current ChatGPT project when the toolbar icon is clicked. No page or chat content is collected or transmitted.
 
 ## Data usage
 

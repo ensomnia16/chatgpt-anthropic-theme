@@ -5,8 +5,8 @@ const root = new URL("../", import.meta.url);
 const manifest = JSON.parse(await readFile(new URL("manifest.json", root), "utf8"));
 
 if (manifest.manifest_version !== 3) throw new Error("Manifest V3 is required");
-if (JSON.stringify(manifest.permissions) !== JSON.stringify(["storage", "activeTab"])) {
-  throw new Error("The extension should request only storage and activeTab permissions");
+if (JSON.stringify(manifest.permissions) !== JSON.stringify(["storage"])) {
+  throw new Error("The extension should request only the storage permission");
 }
 
 const requiredFiles = [

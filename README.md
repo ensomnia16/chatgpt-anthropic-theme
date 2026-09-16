@@ -82,8 +82,8 @@ The extension has no analytics, network requests, or remote code. It stores only
 four preferences in Chrome sync storage: the selected font mode, whether the
 color palette is enabled, whether Claude-style thinking words are enabled, and
 whether the optional thinking animation is enabled.
-The `activeTab` permission is used only when the toolbar icon is clicked, so the
-extension can identify and open the active ChatGPT project's new-chat page.
+The project-chat shortcut uses the extension's existing ChatGPT host access and
+does not request a separate tab-reading permission.
 
 ## License
 
