@@ -50,6 +50,11 @@ const css = await readFile(new URL("content.css", root), "utf8");
 if (remoteFontUrl.test(css)) throw new Error("Remote font URLs are not allowed");
 if (!css.includes("CGPT Anthropic Mono")) throw new Error("Anthropic Mono rule is missing");
 if (!css.includes("KaTeX_Main")) throw new Error("KaTeX preservation rule is missing");
+const serifStack = css.match(/html\[data-cgpt-font-mode="serif"\][\s\S]*?\}/)?.[0] || "";
+if (serifStack.indexOf('"CGPT Anthropic Serif Direct"') === -1 ||
+    serifStack.indexOf('"CGPT Anthropic Serif Direct"') > serifStack.indexOf('"CGPT Editorial Serif"')) {
+  throw new Error("Anthropic Serif must precede the Jia editorial fallback");
+}
 
 const contentScript = await readFile(new URL("content.js", root), "utf8");
 if (!contentScript.includes("claudeThinking")) throw new Error("Thinking preference is missing");

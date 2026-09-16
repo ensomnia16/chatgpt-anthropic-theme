@@ -5,13 +5,13 @@ modes and an optional warm color palette.
 
 ## Features
 
-- **Serif** — prefers `Jia Editorial Serif Codex VF`, where regular CSS text maps
-  Chinese to physical Source Han Serif 600 and keeps Anthropic Serif Latin and
-  selected punctuation. It falls back to locally installed Anthropic Serif and
-  Source Han Serif SC SemiBold.
+- **Serif** — prefers locally installed Anthropic Serif directly. Its web-text
+  family names are supported next, followed by `Jia Editorial Serif Codex VF`
+  and Source Han Serif SC SemiBold as CJK fallbacks.
 - **Sans** — Anthropic Sans for Latin text, with ChatGPT's default system
   sans-serif stack for Chinese.
-- **Code** — Anthropic Mono for code blocks, inline code, and keyboard labels.
+- **Code** — Anthropic Mono for code blocks, inline code, and keyboard labels,
+  with direct family-name and web-font-name compatibility.
 - **Math** — preserves KaTeX's own math families.
 - **Colors** — optional warm paper, clay, and ink palette inspired by Anthropic's
   visual language, with light and dark variants.

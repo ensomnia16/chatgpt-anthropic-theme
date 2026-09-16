@@ -4,6 +4,17 @@
  */
 
 @font-face {
+  font-family: "CGPT Anthropic Serif Direct";
+  src:
+    local("Anthropic Serif"),
+    local("Anthropic Serif Variable"),
+    local("AnthropicSerif");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "CGPT Editorial Serif";
   src:
     local("Jia Editorial Serif Codex VF"),
@@ -76,6 +87,17 @@
 }
 
 @font-face {
+  font-family: "CGPT Anthropic Sans Direct";
+  src:
+    local("Anthropic Sans"),
+    local("Anthropic Sans Variable"),
+    local("AnthropicSans");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "CGPT Anthropic Sans";
   src:
     local("Anthropic Sans Web Text Light"),
@@ -126,6 +148,17 @@
 }
 
 @font-face {
+  font-family: "CGPT Anthropic Mono Direct";
+  src:
+    local("Anthropic Mono"),
+    local("Anthropic Mono Variable"),
+    local("AnthropicMono");
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "CGPT Anthropic Mono";
   src:
     local("Anthropic Mono Web"),
@@ -167,14 +200,16 @@
 
 html[data-cgpt-font-mode="serif"] {
   --cgpt-body-font:
-    "CGPT Editorial Serif",
+    "CGPT Anthropic Serif Direct",
     "CGPT Anthropic Serif",
+    "CGPT Editorial Serif",
     "CGPT Source Han Serif 600",
     serif;
 }
 
 html[data-cgpt-font-mode="sans"] {
   --cgpt-body-font:
+    "CGPT Anthropic Sans Direct",
     "CGPT Anthropic Sans",
     ui-sans-serif,
     system-ui,
@@ -204,6 +239,7 @@ html[data-cgpt-font-mode="sans"] {
 
 :where(html body) :where(pre, code, kbd, samp, .font-mono) {
   font-family:
+    "CGPT Anthropic Mono Direct",
     "CGPT Anthropic Mono",
     ui-monospace,
     SFMono-Regular,
