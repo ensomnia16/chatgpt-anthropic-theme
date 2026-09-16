@@ -9,6 +9,7 @@ const backgroundSource = await readFile(new URL("background.js", root), "utf8");
 function createContentContext({ pathname, title, links = [] }) {
   let messageListener;
   let titleObserverCallback;
+  const localState = {};
   const titleNode = {};
   const document = {
     title,
@@ -25,9 +26,11 @@ function createContentContext({ pathname, title, links = [] }) {
     location: { origin: "https://chatgpt.com", pathname },
     MutationObserver: class {
       constructor(callback) {
-        titleObserverCallback = callback;
+        this.callback = callback;
       }
-      observe() {}
+      observe(target) {
+        if (target === titleNode) titleObserverCallback = this.callback;
+      }
       disconnect() {}
       takeRecords() {}
     },
@@ -40,6 +43,10 @@ function createContentContext({ pathname, title, links = [] }) {
     chrome: {
       storage: {
         sync: { get: () => {}, set: () => {} },
+        local: {
+          get: (defaults, callback) => callback({ ...defaults, ...localState }),
+          set: (values) => Object.assign(localState, values)
+        },
         onChanged: { addListener: () => {} }
       },
       runtime: {
@@ -53,14 +60,18 @@ function createContentContext({ pathname, title, links = [] }) {
   };
 
   vm.runInNewContext(contentSource, context);
-  return { document, messageListener, notifyTitleChanged: () => titleObserverCallback?.([]) };
+  return { document, localState, messageListener, notifyTitleChanged: () => titleObserverCallback?.([]) };
 }
 
 const projectId = "g-p-6a439d5d26648191943f0ff2d142fc0e";
 const content = createContentContext({
   pathname: `/g/${projectId}/c/conversation-id`,
   title: "嘉 - 查询河套学院",
-  links: [{ href: `https://chatgpt.com/g/${projectId}-jia/project` }]
+  links: [{
+    href: `https://chatgpt.com/g/${projectId}-jia/project`,
+    textContent: "嘉",
+    getAttribute: () => null
+  }]
 });
 
 assert.equal(content.document.title, "查询河套学院");
@@ -75,6 +86,10 @@ content.messageListener({ type: "getProjectNewChatUrl" }, {}, (value) => {
   response = value;
 });
 assert.equal(response.url, `https://chatgpt.com/g/${projectId}-jia/project`);
+assert.deepEqual(
+  JSON.parse(JSON.stringify(content.localState.knownProjects)),
+  [{ name: "嘉", url: `https://chatgpt.com/g/${projectId}-jia/project` }]
+);
 
 const regularChat = createContentContext({
   pathname: "/c/conversation-id",
@@ -82,22 +97,39 @@ const regularChat = createContentContext({
 });
 assert.equal(regularChat.document.title, "普通对话 - ChatGPT");
 
-let actionListener;
-const updates = [];
-const backgroundContext = {
-  URL,
-  chrome: {
-    action: { onClicked: { addListener: (listener) => (actionListener = listener) } },
-    tabs: {
-      sendMessage: async () => ({ url: `https://chatgpt.com/g/${projectId}-jia/project` }),
-      update: async (tabId, update) => updates.push({ tabId, ...update })
+function createBackgroundContext(selectedProjectUrl = "") {
+  let actionListener;
+  let optionsOpened = false;
+  const createdTabs = [];
+  const backgroundContext = {
+    URL,
+    chrome: {
+      action: { onClicked: { addListener: (listener) => (actionListener = listener) } },
+      runtime: { openOptionsPage: async () => { optionsOpened = true; } },
+      storage: {
+        local: {
+          get: async () => ({ selectedProjectUrl })
+        }
+      },
+      tabs: {
+        create: async (properties) => createdTabs.push(properties)
+      }
     }
-  }
-};
-vm.runInNewContext(backgroundSource, backgroundContext);
-await actionListener({ id: 42, url: `https://chatgpt.com/g/${projectId}/c/conversation-id` });
-assert.deepEqual(updates, [
-  { tabId: 42, url: `https://chatgpt.com/g/${projectId}-jia/project` }
+  };
+  vm.runInNewContext(backgroundSource, backgroundContext);
+  return { action: (tab) => actionListener(tab), createdTabs, optionsOpened: () => optionsOpened };
+}
+
+const selectedUrl = `https://chatgpt.com/g/${projectId}-jia/project`;
+const selectedProject = createBackgroundContext(selectedUrl);
+await selectedProject.action({ id: 42, windowId: 7, url: "https://example.com/" });
+assert.deepEqual(JSON.parse(JSON.stringify(selectedProject.createdTabs)), [
+  { url: selectedUrl, active: true, windowId: 7 }
 ]);
+
+const noSelection = createBackgroundContext();
+await noSelection.action({ id: 42, windowId: 7, url: "https://chatgpt.com/" });
+assert.equal(noSelection.optionsOpened(), true);
+assert.deepEqual(noSelection.createdTabs, []);
 
 console.log("Navigation tests passed");

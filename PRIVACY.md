@@ -13,6 +13,11 @@ optional thinking animation is enabled. These settings are used solely to apply
 the user's chosen appearance on `chatgpt.com`, `chat.openai.com`, and
 `gemini.google.com`.
 
+Chrome local storage remembers project names and URLs discovered from ChatGPT,
+plus the project explicitly selected by the user as the default. This lets the
+toolbar button create the next chat in that project. These values never leave
+the browser.
+
 The extension makes no network requests and contains no remote code. It does not
 read or retain message content. Text-node observation is performed locally and
 temporarily only to replace the live `Thinking` status label when the user has

@@ -127,10 +127,27 @@ legend {
 }
 
 .card-copy small,
-.toggle-row small {
+.toggle-row small,
+.project-settings small {
   color: var(--muted);
   font-size: 11px;
   line-height: 1.45;
+}
+
+.project-settings label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.project-settings select {
+  width: 100%;
+  min-height: 38px;
+  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: var(--paper-2);
+  color: var(--ink);
+  font: inherit;
 }
 
 .check {

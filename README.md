@@ -29,8 +29,10 @@ modes and an optional warm color palette.
 - **Cleaner project tab titles** — removes the project-name prefix from ChatGPT
   project conversations, for example `嘉 - 查询河套学院` becomes `查询河套学院`.
 - **One-click project chat** — clicking the extension's toolbar icon opens a new
-  chat in the project shown in the active ChatGPT tab. Outside a ChatGPT project,
-  it opens a regular new ChatGPT chat.
+  tab for a new chat in the project explicitly selected in the extension's
+  Options page. Project choices are discovered from ChatGPT pages and are never
+  hard-coded. If no project is selected, clicking the icon opens Options instead
+  of creating an unassigned chat.
 - Settings sync through Chrome and apply immediately without reloading the page.
 
 ## Install
@@ -45,6 +47,7 @@ modes and an optional warm color palette.
 Typography settings remain available from the extension's **Options** page:
 right-click the toolbar icon and choose **Options**, or open the extension's
 details page in `chrome://extensions/` and select **Extension options**.
+The same page contains the default-project selector.
 
 ## Fonts
 

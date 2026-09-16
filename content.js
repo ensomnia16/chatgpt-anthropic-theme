@@ -110,9 +110,12 @@ let scanFrame;
 let replaceThinkingWords = false;
 let titleObserver;
 let lastCleanedTitle;
+let projectObserver;
+let projectScanFrame;
 
 const PROJECT_CONVERSATION_PATTERN = /^\/g\/g-p-[^/]+\/c(?:\/|$)/;
 const PROJECT_ROOT_PATTERN = /^\/g\/(g-p-[^/]+)/;
+const KNOWN_PROJECTS_KEY = "knownProjects";
 
 function removeProjectNameFromTitle() {
   if (!PROJECT_CONVERSATION_PATTERN.test(location.pathname)) return;
@@ -160,6 +163,60 @@ function getProjectNewChatUrl() {
   }
 
   return `${location.origin}/g/${projectSegment}/project`;
+}
+
+function projectNameFromAnchor(anchor, url) {
+  const label = anchor.getAttribute?.("aria-label") || anchor.getAttribute?.("title") || anchor.textContent;
+  const normalized = label?.replace(/\s+/g, " ").trim();
+  if (normalized) return normalized;
+
+  const slug = url.pathname.match(/^\/g\/g-p-[^-\/]+-(.+)\/project\/?$/)?.[1];
+  return slug || "ChatGPT 项目";
+}
+
+function discoverProjects() {
+  const projects = new Map();
+  for (const anchor of document.querySelectorAll("a[href]")) {
+    try {
+      const url = new URL(anchor.href, location.origin);
+      if (url.origin !== location.origin || !/^\/g\/g-p-[^/]+\/project\/?$/.test(url.pathname)) continue;
+      projects.set(url.href, { url: url.href, name: projectNameFromAnchor(anchor, url) });
+    } catch {
+      // Ignore links with unsupported URL schemes.
+    }
+  }
+
+  const currentUrl = getProjectNewChatUrl();
+  if (currentUrl && !projects.has(currentUrl)) {
+    const prefix = document.title.split(" - ")[0]?.trim();
+    projects.set(currentUrl, { url: currentUrl, name: prefix || "当前 ChatGPT 项目" });
+  }
+  if (projects.size === 0) return;
+
+  chrome.storage.local.get({ [KNOWN_PROJECTS_KEY]: [] }, (settings) => {
+    const merged = new Map(
+      (Array.isArray(settings[KNOWN_PROJECTS_KEY]) ? settings[KNOWN_PROJECTS_KEY] : [])
+        .filter((project) => project?.url && project?.name)
+        .map((project) => [project.url, project])
+    );
+    for (const project of projects.values()) merged.set(project.url, project);
+    chrome.storage.local.set({ [KNOWN_PROJECTS_KEY]: [...merged.values()] });
+  });
+}
+
+function scheduleProjectDiscovery() {
+  if (projectScanFrame) return;
+  projectScanFrame = requestAnimationFrame(() => {
+    projectScanFrame = undefined;
+    discoverProjects();
+  });
+}
+
+function startProjectDiscovery() {
+  discoverProjects();
+  if (projectObserver) return;
+  projectObserver = new MutationObserver(scheduleProjectDiscovery);
+  projectObserver.observe(document.documentElement, { subtree: true, childList: true });
 }
 
 function normalizedThinkingText(value) {
@@ -375,13 +432,18 @@ function applySettings(settings) {
 chrome.storage.sync.get(DEFAULTS, applySettings);
 
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", startProjectTitleCleanup, { once: true });
+  document.addEventListener("DOMContentLoaded", () => {
+    startProjectTitleCleanup();
+    startProjectDiscovery();
+  }, { once: true });
 } else {
   startProjectTitleCleanup();
+  startProjectDiscovery();
 }
 
 chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   if (message?.type !== "getProjectNewChatUrl") return;
+  discoverProjects();
   sendResponse({ url: getProjectNewChatUrl() });
 });
 

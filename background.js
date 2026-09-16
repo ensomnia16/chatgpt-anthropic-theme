@@ -1,30 +1,30 @@
 const CHATGPT_HOSTS = new Set(["chatgpt.com", "chat.openai.com"]);
+const SELECTED_PROJECT_URL_KEY = "selectedProjectUrl";
 
-function isChatGPTUrl(value) {
+function isProjectNewChatUrl(value) {
   try {
-    return CHATGPT_HOSTS.has(new URL(value).hostname);
+    const url = new URL(value);
+    return CHATGPT_HOSTS.has(url.hostname) && /^\/g\/g-p-[^/]+\/project\/?$/.test(url.pathname);
   } catch {
     return false;
   }
 }
 
+async function getSelectedProjectUrl() {
+  const settings = await chrome.storage.local.get(SELECTED_PROJECT_URL_KEY);
+  return isProjectNewChatUrl(settings[SELECTED_PROJECT_URL_KEY])
+    ? settings[SELECTED_PROJECT_URL_KEY]
+    : null;
+}
+
 chrome.action.onClicked.addListener(async (tab) => {
-  if (!tab.id || !isChatGPTUrl(tab.url)) {
-    if (tab.id) await chrome.tabs.update(tab.id, { url: "https://chatgpt.com/" });
+  const projectUrl = await getSelectedProjectUrl();
+  if (!projectUrl) {
+    await chrome.runtime.openOptionsPage();
     return;
   }
 
-  let projectUrl;
-  try {
-    const response = await chrome.tabs.sendMessage(tab.id, {
-      type: "getProjectNewChatUrl"
-    });
-    projectUrl = response?.url;
-  } catch {
-    // The content script may not be ready immediately after installation.
-  }
-
-  await chrome.tabs.update(tab.id, {
-    url: isChatGPTUrl(projectUrl) ? projectUrl : "https://chatgpt.com/"
-  });
+  const createProperties = { url: projectUrl, active: true };
+  if (Number.isInteger(tab.windowId)) createProperties.windowId = tab.windowId;
+  await chrome.tabs.create(createProperties);
 });

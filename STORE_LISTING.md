@@ -18,7 +18,7 @@ Features:
 - Optional Claude Code thinking words with matched Chinese translations
 - Optional Claude-style · ✢ * ✶ thinking animation
 - Cleaner ChatGPT project tab titles without the repeated project-name prefix
-- One-click new chats inside the current ChatGPT project
+- User-selected default ChatGPT project for one-click new chats in a new tab
 - Settings sync through Chrome and apply immediately
 - No analytics, network requests, remote code, or chat-content collection
 
@@ -38,7 +38,7 @@ Customize ChatGPT and Gemini typography, code font, colors, and transient thinki
 
 ### storage
 
-Stores only the selected font mode and three optional appearance toggles in Chrome sync storage.
+Stores the selected font mode and three optional appearance toggles in Chrome sync storage. Chrome local storage holds project names and URLs discovered from ChatGPT plus the project explicitly selected by the user, so the toolbar shortcut can open a new tab with a new chat assigned to that project.
 
 ### Host permissions
 

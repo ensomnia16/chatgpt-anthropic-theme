@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "ChatGPT Anthropic Typography",
-  "version": "3.3.1",
+  "version": "3.3.2",
   "description": "Anthropic-inspired typography, thinking states, cleaner project tabs, and one-click project chats for ChatGPT and Gemini.",
   "icons": {
     "16": "icons/icon16.png",
@@ -31,7 +31,7 @@
     "service_worker": "background.js"
   },
   "action": {
-    "default_title": "在当前 ChatGPT 项目中新建对话",
+    "default_title": "在默认 ChatGPT 项目中新标签页新建对话",
     "default_icon": {
       "16": "icons/icon16.png",
       "32": "icons/icon32.png"

@@ -64,7 +64,14 @@ if (!contentScript.includes("claudeThinkingAnimation")) throw new Error("Thinkin
 if (!contentScript.includes("removeProjectNameFromTitle")) throw new Error("Project title cleanup is missing");
 
 const backgroundScript = await readFile(new URL("background.js", root), "utf8");
-if (!backgroundScript.includes("getProjectNewChatUrl")) throw new Error("Project chat action is missing");
+if (!backgroundScript.includes("selectedProjectUrl") || !backgroundScript.includes("chrome.tabs.create")) {
+  throw new Error("User-selected project new-tab action is missing");
+}
+if (!backgroundScript.includes("openOptionsPage")) throw new Error("Missing-project setup flow is missing");
+const popupScript = await readFile(new URL("popup.js", root), "utf8");
+if (!popupScript.includes("knownProjects") || !popupScript.includes("selectedProjectUrl")) {
+  throw new Error("Default project selector is missing");
+}
 if (!manifest.host_permissions.includes("https://gemini.google.com/*")) {
   throw new Error("Gemini host permission is missing");
 }
